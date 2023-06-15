@@ -1,25 +1,20 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-public class loginTests {
-    WebDriver wd;
-
-
-     @BeforeMethod
-    public void init(){
-         wd = new ChromeDriver();
-         wd.get("https://telranedu.web.app/home");
-         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-    }
+public class loginTests extends TestBase {
+//    WebDriver wd;
+//
+//
+//     @BeforeMethod
+//    public void init(){
+//         wd = new ChromeDriver();
+//         wd.get("https://telranedu.web.app/home");
+//         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//
+//    }
 
 
     @Test
@@ -44,7 +39,9 @@ public class loginTests {
 
         // Assert
     //    Assert.assertTrue(wd.findElements(By.xpath("//*[.='Sign Out']")).size()>0);
-        Assert.assertTrue(wd.findElements(By.xpath("//button")).size()>0);
+    //    Assert.assertTrue(wd.findElements(By.xpath("//button")).size()>0);
+        pause(5000);
+        Assert.assertTrue(isElementPresent(By.xpath("//button")));
     }
 
     @Test
@@ -68,9 +65,18 @@ public class loginTests {
         // Assert
     }
 
+    @Test
+    public void loginNegativeTestWrongPassword(){
+        String email = "dara@mail.com", password = "Km123567";
+        openLoginForm();
+        fillLoginForm(email, password);
+        submitLogin();
+    }
+
 
     @AfterMethod
     public void tearDown(){
+      //  wd.quit();
 
     }
 
