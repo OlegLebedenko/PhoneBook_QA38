@@ -1,12 +1,14 @@
 package tests;
 
+import manager.TestNgListener;
 import models.User;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+@Listeners(TestNgListener.class)
 
 public class RegistrationTests extends TestBase {
 //    WebDriver wd;
@@ -19,7 +21,6 @@ public class RegistrationTests extends TestBase {
 //        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //
 //    }
-
 
 
     @Test
@@ -38,7 +39,7 @@ public class RegistrationTests extends TestBase {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         User user = new User()
                 .withEmail("fara" + i + "@mail.com")
-                        .withPassword("Mr12356#");
+                .withPassword("Mr12356#");
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(user);
         app.getUser().submitRegistration();
@@ -106,7 +107,7 @@ public class RegistrationTests extends TestBase {
     }
 
     @Test
-    public void registrationNegativeTestWrongPassword(){
+    public void registrationNegativeTestWrongPassword() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         String email = "mara" + i + "@mail.com", password = "kv12356#";
         app.getUser().openLoginForm();
@@ -116,9 +117,5 @@ public class RegistrationTests extends TestBase {
     }
 
 
-    @AfterMethod
-    public void tearDown() {
-      //  wd.quit();
 
-    }
 }

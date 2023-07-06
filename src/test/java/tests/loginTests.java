@@ -124,6 +124,9 @@ public void precondition(){
     app.getUser().openLoginForm();
     app.getUser().fillLoginForm(email, password);
     app.getUser().submitLogin();
+    Assert.assertTrue(app.getUser().isWrongFormatMessage());
+    Assert.assertTrue(app.getUser().isAlertPresent());
+ //   app.getUser().isAlertPresent();
     }
 
 
