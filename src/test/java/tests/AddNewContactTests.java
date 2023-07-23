@@ -11,7 +11,7 @@ public class AddNewContactTests extends TestBase{
 
     Logger logger = LoggerFactory.getLogger(AddNewContactTests.class);
 
-@BeforeMethod
+@BeforeMethod(alwaysRun = true)
     public void precondition(){
     if(!app.getUser().isLogged()){
         String email = "dara@mail.com", password = "Km12356#";
@@ -21,7 +21,7 @@ public class AddNewContactTests extends TestBase{
     }
 }
 
-@Test(invocationCount = 5)
+@Test(invocationCount = 5, groups = {"positive"})
     public void addNewContactPositive(){
     int i = (int)(System.currentTimeMillis()/1000)%3600;
     Contact contact = Contact.builder()

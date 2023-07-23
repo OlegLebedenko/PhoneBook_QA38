@@ -1,12 +1,11 @@
 package tests;
 
+import manager.ProviderData;
 import manager.TestNgListener;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 @Listeners(TestNgListener.class)
 
@@ -22,6 +21,13 @@ public class RegistrationTests extends TestBase {
 //
 //    }
 
+    @BeforeMethod(alwaysRun = true)
+    public void precondition() {
+        if (app.getUser().isLogged()) {
+            app.getUser().logout();
+        }
+    }
+
 
     @Test
     public void registrationPositiveTestBase() {
@@ -34,7 +40,7 @@ public class RegistrationTests extends TestBase {
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
-    @Test
+    @Test(groups = {"smoke", "positive"})
     public void registrationPositiveTestUser() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         User user = new User()
@@ -76,7 +82,7 @@ public class RegistrationTests extends TestBase {
 //        Assert.assertTrue(isElementPresent(By.xpath("//button")));
 //    }
 
-//    @Test
+    //    @Test
 //    public void registrationNegativeTestWrongPassword() {
 //
 //        wd.findElement(By.xpath("//*[.='LOGIN']")).click();
@@ -96,14 +102,25 @@ public class RegistrationTests extends TestBase {
 //        wd.findElement(By.xpath("//button[2]")).click();
 //
 //    }
+    @Test(groups = {"smoke", "positive"}, dataProvider = "userDtoCSV", dataProviderClass = ProviderData.class)
+    public void registrationPositiveTestUserCSV(User user) {
+     logger.info("Registration starts with email: " + user.getEmail() + " and password: " + user.getPassword());
+        app.getUser().openLoginForm();
+        app.getUser().fillLoginForm(user);
+        app.getUser().submitRegistration();
+        app.getUser().pause(3000);
+        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
+    }
 
-    @Test
+    @Test(groups = {"regress", "negative"})
     public void registrationNegativeTestWrongEmail() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         String email = "mara" + i + "mail.ru", password = "Kv12356#";
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(email, password);
         app.getUser().submitRegistration();
+        Assert.assertTrue(app.getUser().isWrongFormatMessage());
+        Assert.assertTrue(app.getUser().isAlertPresent());
     }
 
     @Test
@@ -113,9 +130,17 @@ public class RegistrationTests extends TestBase {
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(email, password);
         app.getUser().submitRegistration();
+        Assert.assertTrue(app.getUser().isWrongFormatMessage());
+        Assert.assertTrue(app.getUser().isAlertPresent());
 
     }
 
+    @AfterClass(alwaysRun = true)
+    public void postcondition() {
+        if (app.getUser().isLogged()) {
+            app.getUser().logout();
+        }
+    }
 
 
 }

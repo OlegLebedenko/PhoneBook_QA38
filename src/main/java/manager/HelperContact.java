@@ -36,7 +36,13 @@ public class HelperContact extends HelperBase {
        return phone.equals(contact.getPhone());
     }
 
+    public void removeContact(){
+        click(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+        click(By.xpath("//button[.='Remove']"));
+    }
+
     public boolean isNoContact(){
+
         return isElementPresent(By.xpath("//h1[.=' No Contacts here!']"));
     }
 }

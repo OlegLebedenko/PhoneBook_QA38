@@ -12,7 +12,7 @@ public class RemoveExistingContactTests extends TestBase{
 
     Logger logger = LoggerFactory.getLogger(RemoveExistingContactTests.class);
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void precondition(){
         if(!app.getUser().isLogged()){
             String email = "dara@mail.com", password = "Km12356#";
@@ -22,18 +22,27 @@ public class RemoveExistingContactTests extends TestBase{
         }
     }
 
-    @Test
-    public void removeContactPositive(){
-        int count1 = app.getHelperContact().getElementCount(By.xpath("//div[@class='contact-item_card__2SOIM']"));
-        System.out.println(count1);
-        app.getHelperContact().click(By.xpath("//div[@class='contact-item_card__2SOIM']"));
-        app.getHelperContact().click(By.xpath("//button[.='Remove']"));
+    @Test(priority = 1)
+    public void removeAContactPositive(){
+        int countBefore = app.getHelperContact().getElementCount(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+        logger.info("Amount of contacts before removing is " + countBefore);
+        app.getHelperContact().removeContact();
         app.getHelperContact().pause(5000);
-        int count2 = app.getHelperContact().getElementCount(By.xpath("//div[@class='contact-item_card__2SOIM']"));
-        System.out.println(count2);
-        int count = count1 - count2;
-        System.out.println(count);
-        logger.info(count + " contact removed");
-        Assert.assertEquals(count, 1);
+        int countAfter = app.getHelperContact().getElementCount(By.xpath("//div[@class='contact-item_card__2SOIM']"));
+        logger.info("Amount of contacts after removing is " + countAfter);
+        int res = countBefore - countAfter;
+        logger.info(res + " contact was removed");
+        Assert.assertEquals(res, 1);
+    }
+
+    @Test(priority = 2)
+    public void removeAllContactsPositive(){
+       while(!app.getHelperContact().isNoContact()){
+           app.getHelperContact().removeContact();
+           app.getHelperContact().pause(1000);
+       }
+       logger.info("All contacts are removed");
+       Assert.assertTrue(app.getHelperContact().isNoContact());
+
     }
 }

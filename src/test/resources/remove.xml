@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="ProductionRemove" verbose="1" >
+    <test name="removetests" >
+        <classes>
+            <class name="tests.RemoveExistingContactTests" />
+        </classes>
+    </test>
+
+
+</suite>

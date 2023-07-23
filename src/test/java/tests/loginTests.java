@@ -20,7 +20,7 @@ public class loginTests extends TestBase {
 //
 //    }
 
-@BeforeMethod
+@BeforeMethod(alwaysRun = true)
 public void precondition(){
     if(app.getUser().isLogged()) {
         app.getUser().logout();
@@ -53,7 +53,7 @@ public void precondition(){
 //        Assert.assertTrue(isElementPresent(By.xpath("//button")));
 //    }
 
-    @Test
+    @Test(groups = {"smoke","positive"})
     public void loginPositiveTestBase(){
         String email = "dara@mail.com", password = "Km12356#";
         app.getUser().openLoginForm();
@@ -116,9 +116,11 @@ public void precondition(){
         app.getUser().openLoginForm();
         app.getUser().fillLoginForm(email, password);
         app.getUser().submitLogin();
+        Assert.assertTrue(app.getUser().isWrongFormatMessage());
+        Assert.assertTrue(app.getUser().isAlertPresent());
     }
 
-    @Test
+    @Test(groups = {"regress", "negative"})
     public void loginNegativeTestWrongEmail(){
     String email = "daramail.com", password = "Km12356#";
     app.getUser().openLoginForm();
