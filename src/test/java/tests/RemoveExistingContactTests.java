@@ -22,7 +22,7 @@ public class RemoveExistingContactTests extends TestBase{
         }
     }
 
-    @Test(priority = 1)
+    @Test(groups = {"regress","positive"})
     public void removeAContactPositive(){
         int countBefore = app.getHelperContact().getElementCount(By.xpath("//div[@class='contact-item_card__2SOIM']"));
         logger.info("Amount of contacts before removing is " + countBefore);
@@ -35,7 +35,7 @@ public class RemoveExistingContactTests extends TestBase{
         Assert.assertEquals(res, 1);
     }
 
-    @Test(priority = 2)
+    @Test(groups = {"positive"})
     public void removeAllContactsPositive(){
        while(!app.getHelperContact().isNoContact()){
            app.getHelperContact().removeContact();

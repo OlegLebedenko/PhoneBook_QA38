@@ -63,7 +63,7 @@ public void precondition(){
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
-    @Test
+    @Test(groups = {"positive"})
     public void loginPositiveTestUser(){
 
     User user = new User()
@@ -76,7 +76,7 @@ public void precondition(){
     Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
-    @Test
+    @Test(groups = {"regress","positive"})
     public void loginPositiveTestUserUser(){
 
         User user = new User()
@@ -110,7 +110,7 @@ public void precondition(){
 //        // Assert
 //    }
 //
-    @Test
+    @Test(groups = {"negative"})
     public void loginNegativeTestWrongPassword(){
         String email = "dara@mail.com", password = "Km123567";
         app.getUser().openLoginForm();

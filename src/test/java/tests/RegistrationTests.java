@@ -29,7 +29,7 @@ public class RegistrationTests extends TestBase {
     }
 
 
-    @Test
+    @Test(groups = {"smoke", "positive"})
     public void registrationPositiveTestBase() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         String email = "mara" + i + "@mail.com", password = "Uv12356#";
@@ -40,7 +40,7 @@ public class RegistrationTests extends TestBase {
         Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//button")));
     }
 
-    @Test(groups = {"smoke", "positive"})
+    @Test(groups = {"positive"})
     public void registrationPositiveTestUser() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         User user = new User()
@@ -102,7 +102,7 @@ public class RegistrationTests extends TestBase {
 //        wd.findElement(By.xpath("//button[2]")).click();
 //
 //    }
-    @Test(groups = {"smoke", "positive"}, dataProvider = "userDtoCSV", dataProviderClass = ProviderData.class)
+    @Test(groups = {"regress", "positive"}, dataProvider = "userDtoCSV", dataProviderClass = ProviderData.class)
     public void registrationPositiveTestUserCSV(User user) {
      logger.info("Registration starts with email: " + user.getEmail() + " and password: " + user.getPassword());
         app.getUser().openLoginForm();
@@ -123,7 +123,7 @@ public class RegistrationTests extends TestBase {
         Assert.assertTrue(app.getUser().isAlertPresent());
     }
 
-    @Test
+    @Test(groups = {"negative"})
     public void registrationNegativeTestWrongPassword() {
         int i = (int) (System.currentTimeMillis() / 1000 % 3600);
         String email = "mara" + i + "@mail.com", password = "kv12356#";

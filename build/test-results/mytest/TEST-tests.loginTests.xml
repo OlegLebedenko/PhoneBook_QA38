@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tests.loginTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-07-21T08:34:55" hostname="DESKTOP-0SQU6JC" time="32.543">
+<testsuite name="tests.loginTests" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-07-24T11:22:13" hostname="DESKTOP-0SQU6JC" time="32.538">
   <properties/>
-  <testcase name="loginNegativeTestWrongEmail" classname="tests.loginTests" time="2.137"/>
-  <testcase name="loginNegativeTestWrongPassword" classname="tests.loginTests" time="1.605"/>
-  <testcase name="loginPositiveTestBase" classname="tests.loginTests" time="6.079"/>
-  <testcase name="loginPositiveTestUser" classname="tests.loginTests" time="6.084"/>
-  <testcase name="loginPositiveTestUserUser" classname="tests.loginTests" time="6.065"/>
+  <testcase name="loginNegativeTestWrongEmail" classname="tests.loginTests" time="2.131"/>
+  <testcase name="loginNegativeTestWrongPassword" classname="tests.loginTests" time="1.583"/>
+  <testcase name="loginPositiveTestBase" classname="tests.loginTests" time="6.086"/>
+  <testcase name="loginPositiveTestUser" classname="tests.loginTests" time="6.086"/>
+  <testcase name="loginPositiveTestUserUser" classname="tests.loginTests" time="6.087"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[console.warn: LoginRecipes: "Falling back to a synchronous message for: https://telranedu.web.app."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://telranedu.web.app."
